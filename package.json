@@ -1,0 +1,14 @@
+{
+  "name": "reqflow",
+  "version": "1.0.0",
+  "description": "Minimalist HTTP request helper for Node.js. Clean wrappers for GET, POST, PUT, DELETE with automatic JSON handling, error catching, and zero bloat.",
+  "main": "src/script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Swarnim Rijal",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.13.2"
+  }
+}
