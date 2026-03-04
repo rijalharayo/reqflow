@@ -28,27 +28,25 @@ function createApiApp(baseURL, config = { }) {
 
 // Helper to format error responses
 function formatError(err) {
-     const status = err.response?.status || 0;
-
-     // 5xx server errors
-     if (status >= 500) {
+     if (!err.response) {
+          // Network error, timeout, no response, etc.
           return {
                headers: {},
                main: {
-                    status,
-                    message: "Something went wrong. Please try again later.",
-                    body: null
+               status: 0,
+               message: err.message || "Network or connection error",
+               body: null
                }
           };
      }
 
-     // 4xx client errors or other status codes
+     // Return the original backend response structure
      return {
-          headers: {},
+          headers: err.response.headers || {},
           main: {
-               status,
-               message: err.response?.data?.message || err.message || "Unknown error",
-               body: err.response?.data || {}
+               status: err.response.status,
+               message: err.response.data?.message || err.message || "Request failed",
+               body: err.response.data || null
           }
      };
 }
